@@ -8,7 +8,6 @@
  */
        
 #include <cs50.h>
-#include <stdio.h>
 #include "helpers.h"
 
 
@@ -25,15 +24,13 @@ bool search(int value, int values[], int n) {
     }
     else{
         int a = n/2;
-        printf("in else clause a = %d\n", a);
         if (values[a] < value){
             int array[n - a + 1];
             for (int i = 0; i < n; i++){
-                array[i] = values[a+1+i];
+                array[i] = values[a+i];
             }
-            int size = n - a + 1;
-            printf("in right half size is %d arrayval is %d\n", n, values[a]);
-            search(value, array, size);
+            int size = n - a;
+            return search(value, array, size);
         }
         else if (values[a] > value){
              int array[n-a];
@@ -41,11 +38,9 @@ bool search(int value, int values[], int n) {
                 array[i] = values[i];
             }
             int size = n - a;
-            printf("in left half size is %d arrayval is %d\n", n, values[a]);
-            search(value, array, size);
+            return search(value, array, size);
         }
         else if (values[a] == value){
-            printf("checked a value of %d and it's true!\n", a); // I know for sure that this line is running.
             return true;
         }
         else 
@@ -71,7 +66,6 @@ void sort(int values[], int n)
         }
     } while (swap == 1);
     for (int i = 0; i < n; i++){
-        printf("%d ",values[i]);
     }
     return;
 }
